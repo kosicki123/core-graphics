@@ -100,5 +100,27 @@ class ViewController: UIViewController {
         
         imageView.image = img
     }
+    
+    func drawRotatedSquares() {
+        UIGraphicsBeginImageContextWithOptions(CGSize(width: 512, height: 512), false, 0)
+        let context = UIGraphicsGetCurrentContext()
+        CGContextTranslateCTM(context, 256, 256)
+        
+        let rotations = 16
+        let amount = M_PI_2 / Double(rotations)
+        
+        for _ in 0 ..< rotations {
+            CGContextRotateCTM(context, CGFloat(amount))
+            CGContextAddRect(context, CGRect(x: -128, y: -128, width: 256, height: 256))
+        }
+        
+        CGContextSetStrokeColorWithColor(context, UIColor.blackColor().CGColor)
+        CGContextStrokePath(context)
+        
+        let img = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        imageView.image = img
+    }
 }
 
