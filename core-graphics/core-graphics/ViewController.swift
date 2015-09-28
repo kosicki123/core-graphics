@@ -9,17 +9,34 @@
 import UIKit
 
 class ViewController: UIViewController {
+    var currentDrawType = 0
 
+    @IBOutlet weak var imageView: UIImageView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        drawRectangle()
         // Do any additional setup after loading the view, typically from a nib.
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    
+    @IBAction func redrawTapped(sender: AnyObject) {
+        ++currentDrawType
+        
+        if currentDrawType > 5 {
+            currentDrawType = 0
+        }
+        
+        switch currentDrawType {
+        case 0:
+            drawRectangle()
+            
+        default:
+            break
+        }
     }
-
-
+    
+    func drawRectangle() {
+        
+    }
 }
 
