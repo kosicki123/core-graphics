@@ -122,5 +122,35 @@ class ViewController: UIViewController {
         
         imageView.image = img
     }
+    
+    func drawLines() {
+        UIGraphicsBeginImageContextWithOptions(CGSize(width: 512, height: 512), false, 0)
+        let context = UIGraphicsGetCurrentContext()
+        CGContextTranslateCTM(context, 256, 256)
+        
+        var first = true
+        var length: CGFloat = 256
+        
+        for _ in 0 ..< 256 {
+            CGContextRotateCTM(context, CGFloat(M_PI_2))
+            
+            if first {
+                CGContextMoveToPoint(context, length, 50)
+                first = false
+            } else {
+                CGContextAddLineToPoint(context, length, 50)
+            }
+            
+            length *= 0.99
+        }
+        
+        CGContextSetStrokeColorWithColor(context, UIColor.blackColor().CGColor)
+        CGContextStrokePath(context)
+        
+        let img = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        imageView.image = img
+    }
 }
 
